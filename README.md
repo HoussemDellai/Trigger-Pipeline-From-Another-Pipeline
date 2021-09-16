@@ -1,5 +1,4 @@
-# Trigger-Pipeline-From-Another-Pipeline
-Triggering a pipeline from another one in Azure DevOps.
+# Trigger Pipeline from another Pipeline in Azure DevOps
 
 There are 2 solutions for triggering a pipeline from another pipeline in Azure DevOps Pipelines using yaml syntax:
 1) Using 'resources' feature 
@@ -7,7 +6,7 @@ There are 2 solutions for triggering a pipeline from another pipeline in Azure D
 
 Let's explore both options.
 
-1) Trigger a pipeline from another pipeline using 'resources' feature
+## 1) Trigger a pipeline from another pipeline using 'resources' feature
 
 Here is below an example of how that works. The second pipeline will be triggered after the first one finishes successfully.
 ```YAML
@@ -49,7 +48,7 @@ Note how we set the trigger for the second pipeline: 'trigger: none'. This is to
 
 More details about resources: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/resources
 
-2) Trigger a pipeline from another pipeline using YAML Templates
+## 2) Trigger a pipeline from another pipeline using YAML Templates
 
 ```YAML
 # azure-pipelines.yml
