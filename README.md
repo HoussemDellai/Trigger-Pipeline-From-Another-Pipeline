@@ -21,10 +21,11 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo This pipeline runs first and will trigger a second pipeline !
+- script: echo This pipeline runs first !
 ```
 
 ```YAML
+# azure-pipelines-trigger.yml
 name: SecondPipeline 
 
 trigger: none
@@ -41,5 +42,34 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-  - script: echo This pipeline was triggered by another pipeline.
+  - script: echo This pipeline was set to be triggered after first pipeline completes.
 ```
+
+Note how we set the trigger for the second pipeline: 'trigger: none'. This is to trigger the pipeline when only after the first one completes (i.e not after commit or PR).
+
+More details about resources: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/resources
+
+2) Trigger a pipeline from another pipeline using YAML Templates
+
+```YAML
+# azure-pipelines.yml
+name: FirstPipeline
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: echo This pipeline runs first and will trigger a second pipeline !
+- template: 2_azure-pipelines-template.yml
+```
+
+```YAML
+# azure-pipelines-template.yml
+steps:
+- script: echo This pipeline will be triggered by another pipeline !
+```
+
+More details about templates: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/templates
